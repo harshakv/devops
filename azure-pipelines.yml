@@ -31,7 +31,11 @@ steps:
 - task: VSTest@2
   inputs:
     testSelector: 'testAssemblies'
-    testAssemblyVer2: '**\EmplyeeApp.MSUnitTest.dll'
+    #testAssemblyVer2: '**\EmplyeeApp.MSUnitTest.dll **\Microsoft.NET.Test.Sdk'
+    testAssemblyVer2: | 
+      '**\EmplyeeApp.MSUnitTest.dll'
+      '!**\*TestAdapter.dll'
+      '!**\obj\**' 
     searchFolder: '$(System.DefaultWorkingDirectory)'
     codeCoverageEnabled: true    
     platform: '$(buildPlatform)'
