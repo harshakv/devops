@@ -37,7 +37,7 @@ steps:
      # '!**/**/**/**/*TestAdapter.dll'
      # '!**/**/**/obj/**'
     testAssemblyVer2: |
-      **\$(buildConfiguration)\*test*.dll
+      **\$(buildConfiguration)\EmplyeeApp.MSUnitTest.dll
       !**\obj\**        
     searchFolder: '$(System.DefaultWorkingDirectory)'
     codeCoverageEnabled: true    
