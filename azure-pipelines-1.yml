@@ -40,5 +40,5 @@ steps:
   displayName: 'NuGet push'
   inputs:
     command: push
-    publishVstsFeed: 'artifactfeed'
+    publishVstsFeed: 'artifactfeeds'
     allowPackageConflicts: true
