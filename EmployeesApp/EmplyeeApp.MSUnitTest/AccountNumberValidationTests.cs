@@ -2,7 +2,7 @@ using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using EmployeesApp.Validation;
 
-namespace Employee.MSUnitTest
+namespace MSUnitTest
 {
     [TestClass]
     public class AccountNumberValidationTests
