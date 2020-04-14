@@ -23,21 +23,21 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: DotNetCoreCLI@2
-  displayName: Test
-  inputs:
-    command: 'test'
-    projects: 'EmplyeeApp.MSUnitTest'
-    arguments: '--configuration $(buildConfiguration)'
-
-# - task: VSTest@2
+# - task: DotNetCoreCLI@2
+#   displayName: Test
 #   inputs:
-#     testSelector: 'testAssemblies'
-#     testAssemblyVer2: |
-#       **\*Test*.dll
-#       !**\*TestAdapter.dll
-#       !**\obj\**
-#     searchFolder: '$(System.DefaultWorkingDirectory)'
-#     vsTestVersion: '16.0'
-#     platform: '$(buildPlatform)'
-#     configuration: '$(buildConfiguration)'
+#     command: 'test'
+#     projects: 'EmplyeeApp.MSUnitTest'
+#     arguments: '--configuration $(buildConfiguration)'
+
+- task: VSTest@2
+  inputs:
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+      **\*Test*.dll
+      !**\*TestAdapter.dll
+      !**\obj\**
+    searchFolder: '$(System.DefaultWorkingDirectory)'
+    vsTestVersion: '16.0'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
