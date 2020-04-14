@@ -36,7 +36,7 @@ steps:
     command: 'test'
     arguments: '--no-build --configuration $(buildConfiguration)'
     publishTestResults: true
-    projects: '**/*.Test.csproj'
+    projects: '**/*Test.csproj'
 
 # - task: VSTest@2
 #   inputs:
