@@ -9031,11 +9031,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\harsha\\devops\\EmployeesApp\\EmplyeeApp.MSUnitTest\\MSUnitTest.csproj",
+      "projectUniqueName": "C:\\harsha\\devops\\EmployeesApp\\MSUnitTest\\MSUnitTest.csproj",
       "projectName": "MSUnitTest",
-      "projectPath": "C:\\harsha\\devops\\EmployeesApp\\EmplyeeApp.MSUnitTest\\MSUnitTest.csproj",
+      "projectPath": "C:\\harsha\\devops\\EmployeesApp\\MSUnitTest\\MSUnitTest.csproj",
       "packagesPath": "C:\\Users\\calibone\\.nuget\\packages\\",
-      "outputPath": "C:\\harsha\\devops\\EmployeesApp\\EmplyeeApp.MSUnitTest\\obj\\",
+      "outputPath": "C:\\harsha\\devops\\EmployeesApp\\MSUnitTest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
