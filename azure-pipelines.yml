@@ -27,7 +27,7 @@ steps:
   displayName: Test
   inputs:
     command: 'test'
-    projects: '$(Parameters.UnitTestProjects)'
+    projects: 'EmplyeeApp.MSUnitTest'
     arguments: '--configuration $(buildConfiguration)'
 
 # - task: VSTest@2
