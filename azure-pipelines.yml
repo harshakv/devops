@@ -19,7 +19,8 @@ steps:
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" 
+    #/p:DeployIisAppPath="Default Web Site"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
@@ -54,8 +55,8 @@ steps:
 
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: $(build.artifactstagingdirectory)
-    artifactName: devopsWebApp
+    targetPath: $(build.artifactStagingDirectory)\WebApp.zip
+    artifactName: devopsWebApp    
 
 - task: DownloadPipelineArtifact@2
   inputs:
