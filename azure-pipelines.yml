@@ -23,13 +23,6 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-# - task: DotNetCoreCLI@2
-#   displayName: Test
-#   inputs:
-#     command: 'test'
-#     projects: 'EmplyeeApp.MSUnitTest'
-#     arguments: '--configuration $(buildConfiguration)'
-
 - task: DotNetCoreCLI@2
   displayName: 'Run unit tests - $(buildConfiguration)'
   inputs:
@@ -38,22 +31,18 @@ steps:
     publishTestResults: true
     projects: '**/*Test.csproj'
 
-# - task: VSTest@2
+# - task: ArchiveFiles@2
 #   inputs:
-#     testSelector: 'testAssemblies'
-#     testAssemblyVer2: |
-#       **\*Test*.dll
-#       !**\*TestAdapter.dll
-#       !**\obj\**
-#     searchFolder: '$(System.DefaultWorkingDirectory)'
-#     vsTestVersion: '16.0'
-#     platform: '$(buildPlatform)'
-#     configuration: '$(buildConfiguration)'
+#     rootFolderOrFile: '$(Build.BinariesDirectory)'
+#     includeRootFolder: true
+#     archiveType: 'zip'
+#     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+#     replaceExistingArchive: true
 
-- task: ArchiveFiles@2
+- task: DotNetCoreCLI@2
+  displayName: Publish
   inputs:
-    rootFolderOrFile: '$(Build.BinariesDirectory)'
-    includeRootFolder: true
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-    replaceExistingArchive: true
+    command: publish
+    publishWebProjects: True
+    arguments: '--configuration $(BuildConfiguration) --output "$(build.artifactstagingdirectory)"'
+    zipAfterPublish: True
