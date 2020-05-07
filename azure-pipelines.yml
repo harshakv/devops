@@ -31,6 +31,7 @@ steps:
     arguments: '--no-build --configuration $(buildConfiguration)'
     publishTestResults: true
     projects: '**/*Test.csproj'
+    
 
 # - task: ArchiveFiles@2
 #   inputs:
