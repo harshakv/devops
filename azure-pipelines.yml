@@ -23,7 +23,16 @@ steps:
     #/p:DeployIisAppPath="Default Web Site"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-  
+- task: reportgenerator@4
+  inputs:
+    reports: '**/coverage.cobertura.xml'
+    targetdir: 'coveragereport'
+
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '**/coverage.cobertura.xml'
+    reportDirectory: 'CoverageReport'
 
 - task: DotNetCoreCLI@2
   displayName: 'Run unit tests - $(buildConfiguration)'
