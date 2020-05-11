@@ -33,47 +33,17 @@ steps:
     publishTestResults: true
     projects: '**/*Test.csproj'
         
-- task: reportgenerator@4
-  inputs:
-    reports: '$(Build.SourcesDirectory)/EmployeesApp/MSUnitTest/coverage.cobertura.xml'
-    targetdir: '$(Build.SourcesDirectory)/CodeCoverage'
-    reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
-
-- task: PublishCodeCoverageResults@1
-  inputs:
-    codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '$(Build.SourcesDirectory)/EmployeesApp/MSUnitTest/coverage.cobertura.xml'
-    reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
-
-# - task: ArchiveFiles@2
+# - task: reportgenerator@4
 #   inputs:
-#     rootFolderOrFile: '$(Build.BinariesDirectory)'
-#     includeRootFolder: true
-#     archiveType: 'zip'
-#     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-#     replaceExistingArchive: true
+#     reports: '$(Build.SourcesDirectory)/EmployeesApp/MSUnitTest/coverage.cobertura.xml'
+#     targetdir: '$(Build.SourcesDirectory)/CodeCoverage'
+#     reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
 
-# - task: DotNetCoreCLI@2
-#   displayName: Publish
+# - task: PublishCodeCoverageResults@1
 #   inputs:
-#     command: publish
-#     publishWebProjects: True
-#     arguments: '--configuration $(BuildConfiguration) --output "$(build.artifactstagingdirectory)"'
-#     zipAfterPublish: True
-
-# - task: PublishBuildArtifacts@1
-#   displayName: 'Publish Artifact'
-#   inputs:
-#     PathtoPublish: '$(build.artifactstagingdirectory)'
-
-# - task: PublishPipelineArtifact@1
-#   inputs:
-#     targetPath: $(build.artifactStagingDirectory)\WebApp.zip
-#     artifactName: devopsWebApp    
-
-# - task: DownloadPipelineArtifact@2
-#   inputs:
-#     artifact: devopsWebApp
+#     codeCoverageTool: 'Cobertura'
+#     summaryFileLocation: '$(Build.SourcesDirectory)/EmployeesApp/MSUnitTest/coverage.cobertura.xml'
+#     reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
 
 - task: DotNetCoreCLI@2
   displayName: Publish
@@ -87,4 +57,4 @@ steps:
   displayName: 'Publish Artifact'
   inputs:
     PathtoPublish: '$(build.artifactstagingdirectory)'
-    ArtifactName: drops
+    ArtifactName: drop
