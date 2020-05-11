@@ -1,3 +1,4 @@
+
 trigger:
 - master
 
@@ -11,6 +12,8 @@ variables:
 
 steps:
 - task: NuGetToolInstaller@1
+  displayName: bb - $(Build.SourcesDirectory)
+  dskdjskj
 
 - task: NuGetCommand@2
   inputs:
@@ -31,6 +34,11 @@ steps:
     arguments: '--no-build --configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
     publishTestResults: true
     projects: '**/*Test.csproj'
+        
+reports: '$(Build.SourcesDirectory)/tests/**/coverage.cobertura.xml'
+    targetdir: '$(Build.SourcesDirectory)/CodeCoverage'
+    reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
+    assemblyfilters: '-xunit*'
         
 - task: reportgenerator@4
   inputs:
