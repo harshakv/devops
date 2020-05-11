@@ -23,6 +23,15 @@ steps:
     #/p:DeployIisAppPath="Default Web Site"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Run unit tests - $(buildConfiguration)'
+  inputs:
+    command: 'test'
+    arguments: '--no-build --configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
+    publishTestResults: true
+    projects: '**/*Test.csproj'
+        
 - task: reportgenerator@4
   inputs:
     reports: '**/coverage.cobertura.xml'
@@ -34,14 +43,6 @@ steps:
     summaryFileLocation: '**/coverage.cobertura.xml'
     reportDirectory: 'CoverageReport'
 
-- task: DotNetCoreCLI@2
-  displayName: 'Run unit tests - $(buildConfiguration)'
-  inputs:
-    command: 'test'
-    arguments: '--no-build --configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
-    publishTestResults: true
-    projects: '**/*Test.csproj'
-        
 
 # - task: ArchiveFiles@2
 #   inputs:
