@@ -19,4 +19,10 @@ namespace MSUnitTest
         }
 
     }
+    
+    [TestMethod]
+    public void AddTwoNumbers_ReturnsInt()
+    {
+        Assert.AreEqual(5, _validation.addTwoNumbers(2,3));
+    }
 }
