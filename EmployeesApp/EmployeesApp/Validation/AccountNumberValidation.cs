@@ -35,5 +35,11 @@ namespace EmployeesApp.Validation
 
             return true;
         }
+        
+        public int addTwoNumbers(int x, int y)
+        {
+            return x + y;
+
+        }
     }
 }
