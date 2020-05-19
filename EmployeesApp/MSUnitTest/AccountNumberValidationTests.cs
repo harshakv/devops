@@ -17,12 +17,14 @@ namespace MSUnitTest
         {
             Assert.IsTrue(_validation.IsValid("123-4543234576-23"));
         }
+        
+         [TestMethod]
+        public void AddTwoNumbers_ReturnsInt()
+        {
+        Assert.AreEqual(5, _validation.addTwoNumbers(2,3));
+        }
 
     }
     
-    [TestMethod]
-    public void AddTwoNumbers_ReturnsInt()
-    {
-        Assert.AreEqual(5, _validation.addTwoNumbers(2,3));
-    }
+   
 }
