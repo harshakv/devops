@@ -33,17 +33,17 @@ steps:
     #publishTestResults: true
     projects: '**/*Test.csproj'
         
-# - task: reportgenerator@4
-#   inputs:
-#     reports: '$(Build.SourcesDirectory)/EmployeesApp/MSUnitTest/coverage.cobertura.xml'
-#     targetdir: '$(Build.SourcesDirectory)/CodeCoverage'
-#     reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
+- task: reportgenerator@4
+  inputs:
+    reports: '$(Build.SourcesDirectory)/EmployeesApp/MSUnitTest/coverage.cobertura.xml'
+    targetdir: '$(Build.SourcesDirectory)/CodeCoverage'
+    reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
 
-# - task: PublishCodeCoverageResults@1
-#   inputs:
-#     codeCoverageTool: 'Cobertura'
-#     summaryFileLocation: '$(Build.SourcesDirectory)/EmployeesApp/MSUnitTest/coverage.cobertura.xml'
-#     reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'cobertura'
+    summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/cobertura.xml'
+    reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
 
 - task: DotNetCoreCLI@2
   displayName: Publish
