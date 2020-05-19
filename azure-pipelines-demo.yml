@@ -1,0 +1,72 @@
+
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: NuGetToolInstaller@1
+  
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    #msbuildArgs: '/p:DeployOnBuild=true' /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip"' 
+    #/p:DeployIisAppPath="Default Web Site"'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Install ReportGenerator'
+  inputs:
+    command: custom
+    custom: tool
+    arguments: 'install --global dotnet-reportgenerator-globaltool'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Run unit tests - $(buildConfiguration)'
+  inputs:
+    command: 'test'
+    arguments: '--no-build --configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
+    publishTestResults: true
+    projects: '**/*Test.csproj'
+        
+# - task: reportgenerator@4
+#   inputs:
+#     reports: '$(Build.SourcesDirectory)/EmployeesApp/MSUnitTest/coverage.cobertura.xml'
+#     targetdir: '$(Build.SourcesDirectory)/CodeCoverage'
+#     reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
+
+# - script: |
+#     reportgenerator -reports:$(Build.SourcesDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines
+#   displayName: 'Create code coverage report'
+
+# - task: PublishCodeCoverageResults@1
+#   displayName: 'Publish code coverage report'
+#   inputs:
+#     codeCoverageTool: 'cobertura'
+#     summaryFileLocation: '$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
+#     #reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
+
+- task: DotNetCoreCLI@2
+  displayName: Publish
+  inputs:
+    command: publish
+    publishWebProjects: True
+    arguments: '--configuration $(BuildConfiguration) --output "$(build.artifactstagingdirectory)"'
+    zipAfterPublish: True
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+    ArtifactName: drop
